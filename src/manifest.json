@@ -1,0 +1,16 @@
+{
+    "name": "Daily Mail Blocker",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Reduces the danger of reading Daily Mail articles.",
+    "background": {
+        "scripts": [
+            "daily-mail-blocker.js"
+        ]
+    },
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "http://www.dailymail.co.uk/*"
+    ]
+}
