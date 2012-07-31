@@ -3,11 +3,32 @@
     "version": "1.0",
     "manifest_version": 2,
     "description": "Reduces the danger of reading Daily Mail articles.",
+    "icons": {
+        "128": "icon128.png"  
+    },
     "background": {
         "scripts": [
-            "daily-mail-blocker.js"
+            "background.js"
         ]
     },
+    "page_action": {
+        "default_icon": "icon128.png",
+        "default_title": "There are Daily Mail links in this page!"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "contentscript.js"
+            ],
+            "run_at": "document_idle",
+            "all_frames": false
+        }
+    ],
+    
     "permissions": [
         "webRequest",
         "webRequestBlocking",
