@@ -10,5 +10,11 @@ chrome.webRequest.onBeforeRequest.addListener(
     types: ['main_frame']
   },
   # extraInfoSpec
-  ["blocking"]);
+  ["blocking"])
+
+onRequest = (request, sender, sendResponse) ->
+    chrome.pageAction.show(sender.tab.id)
+    sendResponse({})
+
+chrome.extension.onRequest.addListener(onRequest)
 
