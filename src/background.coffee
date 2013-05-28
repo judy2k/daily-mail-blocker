@@ -1,8 +1,5 @@
 chrome.webRequest.onBeforeRequest.addListener(
-    (info) ->
-        console.log("No!!!: " + info.url);
-        return {redirectUrl: 'http://www.theguardian.co.uk'}
-  ,
+  redirectDailyMail,
   {
     urls: [
       "http://www.dailymail.co.uk/*",
@@ -10,7 +7,8 @@ chrome.webRequest.onBeforeRequest.addListener(
     types: ['main_frame']
   },
   # extraInfoSpec
-  ["blocking"])
+  ["blocking"]
+)
 
 onRequest = (request, sender, sendResponse) ->
     chrome.pageAction.show(sender.tab.id)

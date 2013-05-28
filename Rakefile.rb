@@ -1,4 +1,5 @@
 require 'rake/clean'
+require 'fileutils'
 
 directory 'daily-mail-blocker'
 CLOBBER << 'daily-mail-blocker'
@@ -22,8 +23,12 @@ COFFEE_SOURCES.each do |source|
     task :build => target
 end
 
+task :copy_tests do
+    FileUtils.cp_r 'src/test', 'daily-mail-blocker', :verbose => true
+end
+
 desc "Build the extension."
-task :build
+task :build => :copy_tests
 
 file 'daily-mail-blocker.zip' => [:build, 'daily-mail-blocker'] + FileList['daily-mail-blocker/**/*.*'] do
     sh "zip -r daily-mail-blocker daily-mail-blocker"
