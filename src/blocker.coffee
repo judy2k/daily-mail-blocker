@@ -16,7 +16,8 @@ GUARDIAN_MAP =
     xml.body.innerHTML = htmlSource;
     console.log("XML: ", xml)
     # debugger
-    titleText = xml.evaluate('/descendant::title[last()]', xml, null, XPathResult.STRING_TYPE, null).stringValue
+    # titleText = xml.evaluate('/descendant::title[last()]', xml, null, XPathResult.STRING_TYPE, null).stringValue
+    titleText = xml.evaluate('//meta[@name="keywords"]/@content', xml, null, XPathResult.STRING_TYPE, null).stringValue
     console.log("Obtained title:", titleText)
     # War memorial defaced as EDL prepare to march on Downing Street while tensions rise across the country  | Mail Online
     return titleText.replace(/\s*\|\s*Mail Online/, "")
