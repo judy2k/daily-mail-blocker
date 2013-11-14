@@ -1,9 +1,14 @@
 require 'rake/clean'
 require 'fileutils'
 
+INKSCAPE = '/Applications/Inkscape.app/Contents/Resources/bin/inkscape'
+
 directory 'daily-mail-blocker'
 CLOBBER << 'daily-mail-blocker'
 
+def export_icon(dest, size)
+    sh "#{INKSCAPE} -w #{size} -h #{size} -i icon --without-gui --export-png='#{dest}'"
+end
 
 # Building Tasks --------------------------------------------------------------
 
@@ -26,6 +31,10 @@ COFFEE_SOURCES.each do |source|
         sh "coffee -c -o daily-mail-blocker #{source}"
     end
     task :build => target
+end
+
+file 'src/icon48.png' => 'graphics/icon_working.svg' do |t|
+    export_icon t.dest, 48
 end
 
 # Copy the test directory to dest:
