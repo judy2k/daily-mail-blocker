@@ -1,13 +1,14 @@
 require 'rake/clean'
 require 'fileutils'
 
-INKSCAPE = '/Applications/Inkscape.app/Contents/Resources/bin/inkscape'
+#INKSCAPE = '/Applications/Inkscape.app/Contents/Resources/bin/inkscape'
+INKSCAPE = '~/Applications/Inkscape.app/Contents/Resources/bin/inkscape'
 
 directory 'daily-mail-blocker'
 CLOBBER << 'daily-mail-blocker'
 
 def export_icon(dest, size)
-    sh "#{INKSCAPE} -w #{size} -h #{size} -i icon --without-gui --export-png='#{dest}'"
+    sh "#{INKSCAPE} -w #{size} -h #{size} -i logo --without-gui --export-png='#{dest}' graphics/icon_working.svg"
 end
 
 # Building Tasks --------------------------------------------------------------
@@ -33,14 +34,25 @@ COFFEE_SOURCES.each do |source|
     task :build => target
 end
 
-file 'src/icon48.png' => 'graphics/icon_working.svg' do |t|
-    export_icon t.dest, 48
+file 'daily-mail-blocker/icon256.png' => 'graphics/icon_working.svg' do |t|
+    export_icon t.name, 256
 end
+task :icons => 'daily-mail-blocker/icon256.png'
 
-# Copy the test directory to dest:
-task :copy_tests do
-    FileUtils.cp_r 'src/test', 'daily-mail-blocker', :verbose => true
+file 'daily-mail-blocker/icon128.png' => 'graphics/icon_working.svg' do |t|
+    export_icon t.name, 128
 end
+task :icons => 'daily-mail-blocker/icon128.png'
+
+file 'daily-mail-blocker/icon48.png' => 'graphics/icon_working.svg' do |t|
+    export_icon t.name, 48
+end
+task :icons => 'daily-mail-blocker/icon48.png'
+
+file 'daily-mail-blocker/icon16.png' => 'graphics/icon_working.svg' do |t|
+    export_icon t.name, 16
+end
+task :icons => 'daily-mail-blocker/icon16.png'
 
 
 # Packaging Tasks -------------------------------------------------------------
@@ -61,7 +73,7 @@ CLOBBER << 'daily-mail-blocker.crx'
 #
 
 desc "Build the extension."
-task :build => :copy_tests
+task :build
 
 desc "Build a zip file suitable for upload to the Google Play Store"
 task :zip => 'daily-mail-blocker.zip'
