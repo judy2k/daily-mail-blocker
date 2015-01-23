@@ -1,10 +1,14 @@
 {
     "name": "Daily Mail Blocker",
-    "version": "1.0",
+    "version": "1.2",
     "manifest_version": 2,
-    "description": "Reduces the danger of reading Daily Mail articles.",
+    "description": "Reduce the risk of reading Daily Mail articles!",
     "icons": {
-        "128": "icon128.png"  
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png",
+        "256": "icon256.png"
+
     },
     "background": {
         "scripts": [
@@ -34,9 +38,5 @@
         "webRequest",
         "webRequestBlocking",
         "http://www.dailymail.co.uk/*"
-    ],
-
-    "web_accessible_resources": [
-        "test/SpecRunner.html"
     ]
 }
